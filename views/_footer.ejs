@@ -1,3 +1,8 @@
 <footer>
-    page Footer
+    <ul>
+    <% if(locals.user){%>
+        <li><a href='/'>HOME</a></li>
+        <li><a href='/user/profile'>PROFILE</a></li>
+        <%}%>
+    </ul>
 </footer>

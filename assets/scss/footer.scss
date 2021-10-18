@@ -1,0 +1,21 @@
+footer{
+    background-color: blue;
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    ul{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        li{
+            list-style-type: none;
+            a{
+                color:black;
+                font-weight:600;
+                text-decoration: none;
+            }
+        }
+    }
+}
