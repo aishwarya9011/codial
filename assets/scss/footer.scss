@@ -1,21 +1,18 @@
-footer{
-    background-color: blue;
-    display:flex;
-    flex-direction: row;
+#layout-footer{
+    color: white;
+    a{
+        color: white;
+        text-decoration: none;
+    }
+
+    background: grey;
+    padding: 5px 10px;
+    display: flex;
     justify-content: flex-start;
-    align-items: center;
-    ul{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        li{
-            list-style-type: none;
-            a{
-                color:black;
-                font-weight:600;
-                text-decoration: none;
-            }
+
+    .footer-nav{
+        ul{
+            list-style: none;
         }
     }
 }

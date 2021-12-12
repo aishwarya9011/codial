@@ -13,6 +13,21 @@
                     let newPost = newPostDom(data.data.post);
                     $('#posts-list-container>ul').prepend(newPost);
                     deletePost($(' .delete-post-button',newPost));
+
+                     // call the create comment class
+                     new PostComments(data.data.post._id);
+
+                     // CHANGE :: enable the functionality of the toggle like button on the new post
+                     new ToggleLike($(' .toggle-like-button', newPost));
+ 
+                     new Noty({
+                         theme: 'relax',
+                         text: "Post published!",
+                         type: 'success',
+                         layout: 'topRight',
+                         timeout: 1500
+                         
+                     }).show();
                 },error: function(error){
                     console.log(error.responseText);
                 }
@@ -32,10 +47,19 @@
          <br>
    
        <small>${post.user.name}</small>
+       <br>
+                        <small>
+                            
+                                <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post">
+                                    0 Likes
+                                </a>
+                            
+                        </small>
+
        </p>
        <div class="post-comments">
                
-                 <form action="/comments/create" method="POST">
+                 <form id="post-${ post._id }-comments-form" action="/comments/create" method="POST">
                          <input type="text"name="content"placeholder="Type here to add Comment..">
                          <input type="hidden"name="post" value="${post._id}">
                          <input type="submit"value="Add Comment">
@@ -52,7 +76,7 @@
    </li>`)
    }
    let deletePost = function(deleteLink){
-       $(deleteLink),click(function(e){
+       $(deleteLink).click(function(e){
            e.preventDefault();
            $.ajax({
                type:'get',
@@ -60,11 +84,36 @@
                success: function(data){
                    $(`post-$(data.data.post_id)`).remove();
 
+                   new Noty({
+                    theme: 'relax',
+                    text: "Post Deleted",
+                    type: 'success',
+                    layout: 'topRight',
+                    timeout: 1500
+                    
+                }).show();
+
                },error: function(error){
                    console.log(error.responseText);
                }
            });
        });
    }
+
+   // loop over all the existing posts on the page (when the window loads for the first time) and call the delete post method on delete link of each, also add AJAX (using the class we've created) to the delete button of each
+   let convertPostsToAjax = function(){
+    $('#posts-list-container>ul>li').each(function(){
+        let self = $(this);
+        let deleteButton = $(' .delete-post-button', self);
+        deletePost(deleteButton);
+
+        // get the post's id by splitting the id attribute
+        let postId = self.prop('id').split("-")[1]
+        new PostComments(postId);
+    });
+}
+
    createPost();
+   convertPostsToAjax();
+
 }

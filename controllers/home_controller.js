@@ -9,6 +9,8 @@ module.exports.home = async function(req,res){
         //posts: posts
    ///})
    try{
+             // CHANGE :: populate the likes of each post and comment
+
     let posts = await Post.find({})
     .sort('-createdAt')
     .populate('user')
@@ -16,8 +18,12 @@ module.exports.home = async function(req,res){
       path:'comments',
       populate:{
         path:'user'
+      },
+      populate:{
+        path:'likes'
       }
-    });
+    }).populate('comments')
+    .populate('likes');
     let users = await User.find({});
  
     return res.render('home',{
@@ -31,6 +37,5 @@ module.exports.home = async function(req,res){
         return;
    }
   
-   //populate the user of each post
    
 }

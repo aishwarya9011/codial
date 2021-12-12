@@ -1,16 +1,15 @@
 #home-container{
-    height:100vh;
-    display:flex;
-    flex-direction: row;
+    display: flex;
+    
     #feed-posts{
-        width:70%;
+        width: 70%;
         padding: 10px;
     }
+
     #user-friends{
-        width:30%;
-        height:100%;
-        padding:10px;
-        border-left: 2px solid lightgrey;
-        
+        width: 30%;
+        padding: 10px;
+        border-left: 1px solid lightgrey;
+        height: 100%;
     }
 }

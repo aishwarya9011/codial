@@ -83,7 +83,8 @@ module.exports.create = function(req,res){
               return res.redirect('/user/sign-in');
           })
       }else{
-          return res.redirect('/user/sign-up');
+        req.flash('success', 'You have signed up, login to continue!');
+        return res.redirect('back');
       }
     })
 
