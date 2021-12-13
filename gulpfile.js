@@ -7,6 +7,10 @@ const uglify = require('gulp-uglify-es').default;
 const imagemin = require('gulp-imagemin');
 const del = require('del');
 
+gulp.task('default',function(){
+    console.log('Hello Gulp!')
+});
+
 gulp.task('css',function(done){
     console.log('minifying css....');
     gulp.src('./assets/sass/**/*.scss')
